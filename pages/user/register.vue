@@ -48,6 +48,7 @@ const secondPasswordRules = function () {
 
   return message;
 };
+const userAccountStore = useAccountStore();
 </script>
 
 <template>
@@ -102,7 +103,13 @@ const secondPasswordRules = function () {
             ></v-icon>
           </template>
         </v-text-field>
-        <v-btn location="center">注册</v-btn>
+        <v-btn
+          location="center"
+          @click="
+            userAccountStore.setUser(userAccount.id, userAccount.password)
+          "
+          >注册
+        </v-btn>
       </v-form>
     </div>
   </div>
