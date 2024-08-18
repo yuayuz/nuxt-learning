@@ -23,7 +23,7 @@ const darkMode = () => {
 };
 
 const useStore = useUserStore();
-const user = useStore.getUserID;
+const user = ref(useStore.getUserID);
 </script>
 
 <template>
