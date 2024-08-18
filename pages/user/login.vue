@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useAccountStore } from "~/stores/userAccountStore";
-import { useUserStore } from "~/stores/userStore";
+definePageMeta({
+  layout: "account-operation-layout",
+});
 
 const userAccountStore = useAccountStore();
 const userAccount = userAccountStore.getUserAccount;
@@ -58,43 +59,39 @@ const login = function () {
 </script>
 
 <template>
-  <div class="tw-h-full tw-pt-[4rem]">
-    <div class="tw-mx-auto tw-mt-16 tw-max-w-xl tw-p-28 tw-shadow-xl">
-      <v-form class="tw-space-y-2">
-        <p class="tw-text-center tw-text-lg">登陆</p>
-        <v-text-field
-          variant="outlined"
-          density="comfortable"
-          v-model="account.id"
-          placeholder="请输入账号"
-          :rules="idRules()"
-        >
-          <template v-slot:prepend-inner>
-            <v-icon icon="mdi-account-outline"></v-icon>
-          </template>
-        </v-text-field>
-        <v-text-field
-          variant="outlined"
-          density="comfortable"
-          :type="visible ? 'text' : 'password'"
-          v-model="account.password"
-          :rules="passwordRules()"
-          placeholder="请输入密码"
-        >
-          <template v-slot:prepend-inner>
-            <v-icon icon="mdi-lock-outline"></v-icon>
-          </template>
-          <template v-slot:append-inner>
-            <v-icon
-              :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
-              @click="visible = !visible"
-            ></v-icon>
-          </template>
-        </v-text-field>
-        <v-btn location="center" @click="login">登陆 </v-btn>
-      </v-form>
-    </div>
-  </div>
+  <v-form class="tw-space-y-2">
+    <p class="tw-text-center tw-text-lg">登陆</p>
+    <v-text-field
+      variant="outlined"
+      density="comfortable"
+      v-model="account.id"
+      placeholder="请输入账号"
+      :rules="idRules()"
+    >
+      <template v-slot:prepend-inner>
+        <v-icon icon="mdi-account-outline"></v-icon>
+      </template>
+    </v-text-field>
+    <v-text-field
+      variant="outlined"
+      density="comfortable"
+      :type="visible ? 'text' : 'password'"
+      v-model="account.password"
+      :rules="passwordRules()"
+      placeholder="请输入密码"
+    >
+      <template v-slot:prepend-inner>
+        <v-icon icon="mdi-lock-outline"></v-icon>
+      </template>
+      <template v-slot:append-inner>
+        <v-icon
+          :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+          @click="visible = !visible"
+        ></v-icon>
+      </template>
+    </v-text-field>
+    <v-btn location="center" @click="login">登陆</v-btn>
+  </v-form>
 </template>
 
 <style scoped></style>

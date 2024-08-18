@@ -1,9 +1,6 @@
 <template>
-  <v-app>
-    <nuxt-header />
+  <NuxtLayout>
     <NuxtPage />
-  </v-app>
+  </NuxtLayout>
 </template>
-<script setup lang="ts">
-import Header from "~/components/NuxtHeader.vue";
-</script>
+<script setup lang="ts"></script>

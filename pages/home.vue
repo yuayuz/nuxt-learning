@@ -1,12 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  layout: "header-drawer-layout",
+});
+</script>
 
 <template>
-  <navigation-drawer />
-  <div class="tw-h-full tw-pl-[19rem] tw-pt-[4rem]">
-    <div class="tw-h-full">
-      <p class="tw-text-center">home</p>
-    </div>
-  </div>
+  <p class="tw-text-center">home</p>
 </template>
 
 <style scoped></style>

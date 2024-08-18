@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: "account-operation-layout",
+});
+
 const visible = ref(false);
 
 const userAccount = ref({
@@ -52,67 +56,61 @@ const userAccountStore = useAccountStore();
 </script>
 
 <template>
-  <div class="tw-h-full tw-pt-[4rem]">
-    <div class="tw-mx-auto tw-mt-16 tw-max-w-xl tw-p-28 tw-shadow-xl">
-      <v-form class="tw-space-y-2">
-        <p class="tw-text-center tw-text-lg">注册</p>
-        <v-text-field
-          variant="outlined"
-          density="comfortable"
-          v-model="id"
-          placeholder="请输入账号"
-          :rules="idRules()"
-        >
-          <template v-slot:prepend-inner>
-            <v-icon icon="mdi-account-outline"></v-icon>
-          </template>
-        </v-text-field>
-        <v-text-field
-          variant="outlined"
-          density="comfortable"
-          :type="visible ? 'text' : 'password'"
-          v-model="firstPassword"
-          :rules="firstPasswordRules()"
-          placeholder="请输入密码"
-        >
-          <template v-slot:prepend-inner>
-            <v-icon icon="mdi-lock-outline"></v-icon>
-          </template>
-          <template v-slot:append-inner>
-            <v-icon
-              :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
-              @click="visible = !visible"
-            ></v-icon>
-          </template>
-        </v-text-field>
-        <v-text-field
-          variant="outlined"
-          density="comfortable"
-          :type="visible ? 'text' : 'password'"
-          v-model="secondPassword"
-          placeholder="请再次输入密码"
-          :rules="secondPasswordRules()"
-        >
-          <template v-slot:prepend-inner>
-            <v-icon icon="mdi-lock-outline"></v-icon>
-          </template>
-          <template v-slot:append-inner>
-            <v-icon
-              :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
-              @click="visible = !visible"
-            ></v-icon>
-          </template>
-        </v-text-field>
-        <v-btn
-          location="center"
-          @click="
-            userAccountStore.setUser(userAccount.id, userAccount.password)
-          "
-          >注册
-        </v-btn>
-      </v-form>
-    </div>
-  </div>
+  <v-form class="tw-space-y-2">
+    <p class="tw-text-center tw-text-lg">注册</p>
+    <v-text-field
+      variant="outlined"
+      density="comfortable"
+      v-model="id"
+      placeholder="请输入账号"
+      :rules="idRules()"
+    >
+      <template v-slot:prepend-inner>
+        <v-icon icon="mdi-account-outline"></v-icon>
+      </template>
+    </v-text-field>
+    <v-text-field
+      variant="outlined"
+      density="comfortable"
+      :type="visible ? 'text' : 'password'"
+      v-model="firstPassword"
+      :rules="firstPasswordRules()"
+      placeholder="请输入密码"
+    >
+      <template v-slot:prepend-inner>
+        <v-icon icon="mdi-lock-outline"></v-icon>
+      </template>
+      <template v-slot:append-inner>
+        <v-icon
+          :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+          @click="visible = !visible"
+        ></v-icon>
+      </template>
+    </v-text-field>
+    <v-text-field
+      variant="outlined"
+      density="comfortable"
+      :type="visible ? 'text' : 'password'"
+      v-model="secondPassword"
+      placeholder="请再次输入密码"
+      :rules="secondPasswordRules()"
+    >
+      <template v-slot:prepend-inner>
+        <v-icon icon="mdi-lock-outline"></v-icon>
+      </template>
+      <template v-slot:append-inner>
+        <v-icon
+          :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+          @click="visible = !visible"
+        ></v-icon>
+      </template>
+    </v-text-field>
+    <v-btn
+      location="center"
+      @click="userAccountStore.setUser(userAccount.id, userAccount.password)"
+      >注册
+    </v-btn>
+  </v-form>
 </template>
 
 <style scoped></style>

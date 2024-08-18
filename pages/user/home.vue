@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  layout: "header-layout",
+});
+</script>
 
 <template>
-  <div class="tw-pt-[4rem]"><p>home</p></div>
+  <p class="tw-text-center">home</p>
 </template>
 
 <style scoped></style>

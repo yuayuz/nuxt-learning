@@ -1,14 +1,12 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: "header-drawer-layout",
+});
 const route = useRoute();
 </script>
 
 <template>
-  <navigation-drawer />
-  <div class="tw-h-full tw-pl-[19rem] tw-pt-[4rem]">
-    <div class="tw-h-full">
-      <p class="tw-text-center">{{ route.params.id }}</p>
-    </div>
-  </div>
+  <p class="tw-text-center">{{ route.params.id }}</p>
 </template>
 
 <style scoped></style>
