@@ -61,12 +61,20 @@ const user = useStore.getUserID;
         </v-btn>
       </template>
       <v-list>
-        <v-list-item>
+        <v-list-item
+          @click="
+            user === '' ? navigate('/user/register') : navigate('/user/home')
+          "
+        >
           <template v-slot:title>
             {{ user === "" ? "用户注册" : "用户信息" }}
           </template>
         </v-list-item>
-        <v-list-item>
+        <v-list-item
+          @click="
+            user === '' ? navigate('/user/login') : navigate('/user/home')
+          "
+        >
           <template v-slot:title>
             {{ user === "" ? "用户登陆" : "用户退出" }}
           </template>
