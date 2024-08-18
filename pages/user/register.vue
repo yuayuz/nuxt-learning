@@ -1,8 +1,110 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const visible = ref(false);
+
+const userAccount = ref({
+  id: "",
+  password: "",
+});
+const id = ref("");
+const firstPassword = ref("");
+const secondPassword = ref("");
+const idRules = function () {
+  const message = [];
+  if (Number(id.value) >= 0) {
+    message.push(true);
+  } else {
+    message.push("请输入数字");
+  }
+  if (id.value.length == 9) {
+    userAccount.value.id = id.value;
+    message.push(true);
+  } else {
+    message.push("请输入九位账号");
+  }
+  return message;
+};
+const firstPasswordRules = function () {
+  const message = [];
+  if (firstPassword.value.length == 9) {
+    message.push(true);
+  } else {
+    message.push("请输入九位密码");
+  }
+  return message;
+};
+const secondPasswordRules = function () {
+  const message = [];
+  if (firstPassword.value === secondPassword.value) {
+    userAccount.value.password = secondPassword.value;
+    message.push(true);
+  } else {
+    message.push("两次密码不一致");
+  }
+  if (firstPassword.value.length == 9) {
+    message.push(true);
+  } else {
+    message.push("请输入九位密码");
+  }
+
+  return message;
+};
+</script>
 
 <template>
   <div class="tw-h-full tw-pt-[4rem]">
-    <p>register</p>
+    <div class="tw-mx-auto tw-mt-16 tw-max-w-xl tw-p-28 tw-shadow-xl">
+      <v-form class="tw-space-y-2">
+        <p class="tw-text-center tw-text-lg">注册</p>
+        <v-text-field
+          variant="outlined"
+          density="comfortable"
+          v-model="id"
+          placeholder="请输入账号"
+          :rules="idRules()"
+        >
+          <template v-slot:prepend-inner>
+            <v-icon icon="mdi-account-outline"></v-icon>
+          </template>
+        </v-text-field>
+        <v-text-field
+          variant="outlined"
+          density="comfortable"
+          :type="visible ? 'text' : 'password'"
+          v-model="firstPassword"
+          :rules="firstPasswordRules()"
+          placeholder="请输入密码"
+        >
+          <template v-slot:prepend-inner>
+            <v-icon icon="mdi-lock-outline"></v-icon>
+          </template>
+          <template v-slot:append-inner>
+            <v-icon
+              :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+              @click="visible = !visible"
+            ></v-icon>
+          </template>
+        </v-text-field>
+        <v-text-field
+          variant="outlined"
+          density="comfortable"
+          :type="visible ? 'text' : 'password'"
+          v-model="secondPassword"
+          placeholder="请再次输入密码"
+          :rules="secondPasswordRules()"
+        >
+          <template v-slot:prepend-inner>
+            <v-icon icon="mdi-lock-outline"></v-icon>
+          </template>
+          <template v-slot:append-inner>
+            <v-icon
+              :icon="visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+              @click="visible = !visible"
+            ></v-icon>
+          </template>
+        </v-text-field>
+        <v-btn location="center">注册</v-btn>
+      </v-form>
+    </div>
   </div>
 </template>
 
