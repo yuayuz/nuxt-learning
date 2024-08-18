@@ -19,6 +19,8 @@ const darkMode = () => {
   }
   mode.value = theme.global.name.value;
 };
+
+const user = ref(false);
 </script>
 
 <template>
@@ -32,7 +34,9 @@ const darkMode = () => {
       Nuxt-learning
     </div>
     <div class="tw-flex tw-w-1/3 tw-content-center">
-      <v-btn variant="text" @click="navigate('/home')">Home</v-btn>
+      <v-btn density="comfortable" variant="text" @click="navigate('/home')"
+        >Home</v-btn
+      >
     </div>
     <div class="tw-relative tw-flex tw-w-1/3 tw-content-center">
       <v-icon
@@ -43,6 +47,29 @@ const darkMode = () => {
         class="tw-absolute tw-left-2/3 tw-right-10"
       ></v-icon>
     </div>
+    <v-menu class="tw-relative tw-left-1/2">
+      <template v-slot:activator="{ props }">
+        <v-btn
+          density="comfortable"
+          v-bind="props"
+          class="tw-relative tw-rounded-full tw-text-sky-400"
+          variant="text"
+          >用户
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item>
+          <template v-slot:title>
+            {{ user ? "用户信息" : "用户注册" }}
+          </template>
+        </v-list-item>
+        <v-list-item>
+          <template v-slot:title>
+            {{ user ? "用户退出" : "用户登陆" }}
+          </template>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </div>
 </template>
 
