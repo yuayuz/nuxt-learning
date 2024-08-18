@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUserStore } from "~/stores/userStore";
+
 function navigate(page: string) {
   return navigateTo({
     path: `${page}`,
@@ -20,7 +22,8 @@ const darkMode = () => {
   mode.value = theme.global.name.value;
 };
 
-const user = ref(false);
+const useStore = useUserStore();
+const user = useStore.getUserID;
 </script>
 
 <template>
@@ -35,8 +38,8 @@ const user = ref(false);
     </div>
     <div class="tw-flex tw-w-1/3 tw-content-center">
       <v-btn density="comfortable" variant="text" @click="navigate('/home')"
-        >Home</v-btn
-      >
+        >Home
+      </v-btn>
     </div>
     <div class="tw-relative tw-flex tw-w-1/3 tw-content-center">
       <v-icon
@@ -60,12 +63,12 @@ const user = ref(false);
       <v-list>
         <v-list-item>
           <template v-slot:title>
-            {{ user ? "用户信息" : "用户注册" }}
+            {{ user === "" ? "用户注册" : "用户信息" }}
           </template>
         </v-list-item>
         <v-list-item>
           <template v-slot:title>
-            {{ user ? "用户退出" : "用户登陆" }}
+            {{ user === "" ? "用户登陆" : "用户退出" }}
           </template>
         </v-list-item>
       </v-list>
