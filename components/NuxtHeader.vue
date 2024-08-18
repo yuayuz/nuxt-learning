@@ -4,6 +4,21 @@ function navigate(page: string) {
     path: `${page}`,
   });
 }
+
+const theme = useTheme();
+const mode = ref("light");
+const darkMode = () => {
+  localStorage.theme = "tw-dark";
+
+  if (theme.global.current.value.dark) {
+    theme.global.name.value = "light";
+    document.documentElement.classList.remove("tw-dark");
+  } else {
+    theme.global.name.value = "dark";
+    document.documentElement.classList.add("tw-dark");
+  }
+  mode.value = theme.global.name.value;
+};
 </script>
 
 <template>
@@ -18,6 +33,15 @@ function navigate(page: string) {
     </div>
     <div class="tw-flex tw-w-1/3 tw-content-center">
       <v-btn variant="text" @click="navigate('/home')">Home</v-btn>
+    </div>
+    <div class="tw-relative tw-flex tw-w-1/3 tw-content-center">
+      <v-icon
+        :icon="
+          mode === 'light' ? 'mdi-weather-night' : 'mdi-white-balance-sunny'
+        "
+        @click="darkMode()"
+        class="tw-absolute tw-left-2/3 tw-right-10"
+      ></v-icon>
     </div>
   </div>
 </template>
