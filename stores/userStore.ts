@@ -8,7 +8,7 @@ export const useUserStore = defineStore("userStore", {
     getUserID: (state) => state.id,
   },
   actions: {
-    setUserId(id: string, password: string) {
+    setUserId(id: string) {
       this.id = id;
     },
     deleteUser() {
