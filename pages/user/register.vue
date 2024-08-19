@@ -39,12 +39,12 @@ const firstPasswordRules = function () {
 const secondPasswordRules = function () {
   const message = [];
   if (firstPassword.value === secondPassword.value) {
-    userAccount.value.password = secondPassword.value;
     message.push(true);
   } else {
     message.push("两次密码不一致");
   }
   if (firstPassword.value.length == 9) {
+    userAccount.value.password = secondPassword.value;
     message.push(true);
   } else {
     message.push("请输入九位密码");
@@ -53,6 +53,18 @@ const secondPasswordRules = function () {
   return message;
 };
 const userAccountStore = useAccountStore();
+
+let registerData = ref({
+  id: "",
+  password: "",
+});
+const register = async function () {
+  registerData.value = await $fetch("/api/userRegister", {
+    method: "post",
+    body: { id: userAccount.value.id, password: userAccount.value.password },
+  });
+  userAccountStore.setUser(registerData.value.id, registerData.value.password);
+};
 </script>
 
 <template>
@@ -105,11 +117,7 @@ const userAccountStore = useAccountStore();
         ></v-icon>
       </template>
     </v-text-field>
-    <v-btn
-      location="center"
-      @click="userAccountStore.setUser(userAccount.id, userAccount.password)"
-      >注册
-    </v-btn>
+    <v-btn location="center" @click="register()">注册</v-btn>
   </v-form>
 </template>
 
